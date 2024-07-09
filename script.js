@@ -58,8 +58,8 @@ async function fetchPokemonData(query) {
 }
 
 function displayPokemonInfo(pokemon) {
-  document.getElementById('sprite).src = '';
-  document.getElementById('types).innerHTML = '';
+  document.getElementById('sprite').src = '';
+  document.getElementById('types').innerHTML = '';
   document.getElementById('pokemon-name').textContent = pokemon.name.toUpperCase();
   document.getElementById('pokemon-id').textContent = `#${pokemon.id}`;
   document.getElementById('weight').textContent = `Weight: ${pokemon.weight}`;
