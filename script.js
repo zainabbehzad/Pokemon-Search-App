@@ -18,13 +18,13 @@ async function fetchPokemonData(query) {
     let pokemon;
     if (query === '94') {
       pokemon = {
-        name: "gengar",
+        name: 'gengar',
         id: 94,
         weight: 405,
         height: 15,
         types: [
           { type: { name: 'ghost' } },
-          { type: { name: "poison" } },
+          { type: { name: 'poison' } },
         ],
         stats: [
           { base_stat: 60 },
@@ -58,17 +58,17 @@ async function fetchPokemonData(query) {
 }
 
 function displayPokemonInfo(pokemon) {
-  document.getElementById("sprite").src = '';
-  document.getElementById("types").innerHTML = '';
+  document.getElementById('sprite).src = '';
+  document.getElementById('types).innerHTML = '';
   document.getElementById('pokemon-name').textContent = pokemon.name.toUpperCase();
   document.getElementById('pokemon-id').textContent = `#${pokemon.id}`;
   document.getElementById('weight').textContent = `Weight: ${pokemon.weight}`;
   document.getElementById('height').textContent = `Height: ${pokemon.height}`;
 
   pokemon.types.forEach(type => {
-    const typeElement = document.createElement("div");
+    const typeElement = document.createElement('div');
     typeElement.textContent = type.type.name.toUpperCase();
-    document.getElementById("types").appendChild(typeElement);
+    document.getElementById('types').appendChild(typeElement);
   });
 
   document.getElementById('hp').textContent = pokemon.stats[0].base_stat;
