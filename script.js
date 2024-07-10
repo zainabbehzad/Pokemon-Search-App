@@ -28,11 +28,11 @@ async function fetchPokemonData(query) {
         ],
         stats: [
           { base_stat: 60 },
-          { base_stat: 65 }, 
-          { base_stat: 60 }, 
-          { base_stat: 130 }, 
-          { base_stat: 75 }, 
-          { base_stat: 110 }, 
+          { base_stat: 65 },
+          { base_stat: 60 },
+          { base_stat: 130 },
+          { base_stat: 75 },
+          { base_stat: 110 },
         ],
         sprites: {
           front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png'
