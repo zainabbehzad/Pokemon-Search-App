@@ -11,7 +11,7 @@ In addition to the search functionality, the app provides tools for users to kee
 Overall, the Pokemon Search App is a valuable resource for Pokemon fans of all ages, providing a convenient and user-friendly way to explore the vast world of Pokemon.💻📝🚀
 
 ## Demo 📸
-![Screenshot (46)](https://github.com/zainabbehzad/Cash-Register/assets/168668702/f23f3390-6352-4b6e-aa8d-9904392ac8c7)
+![Pokemon Search App](images/Screenshot%20(49).png)
 
 live Demo [https://zainabbehzad.github.io/Cash-Register/]
 
