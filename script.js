@@ -1,82 +1,71 @@
+// Fetch Pokemon data
+async function fetchPokemonData(pokemonId) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error(`Failed to fetch Pokemon data for ID ${pokemonId}`);
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+// Display Pokemon information
+async function displayPokemonInfo(pokemonId) {
+  const pokemonData = await fetchPokemonData(pokemonId);
+  if (pokemonData) {
+    const { name, id, weight, height, sprites, stats, types } = pokemonData;
+    const typeNames = types.map(type => type.type.name);
+    const hpStat = stats.find(stat => stat.stat.name === 'hp');
+    const attackStat = stats.find(stat => stat.stat.name === 'attack');
+    const defenseStat = stats.find(stat => stat.stat.name === 'defense');
+    const specialAttackStat = stats.find(stat => stat.stat.name === 'special-attack');
+    const specialDefenseStat = stats.find(stat => stat.stat.name === 'special-defense');
+    const speedStat = stats.find(stat => stat.stat.name === 'speed');
+
+    // Update the HTML with the Pokemon's information
+    document.getElementById('pokemon-name').textContent = name;
+    document.getElementById('pokemon-id').textContent = `ID: ${id}`;
+    document.getElementById('weight').textContent = `Weight: ${weight} lbs`;
+    document.getElementById('height').textContent = `Height: ${height} ft`;
+    document.getElementById('types').textContent = `Types: ${typeNames.join(', ')}`;
+    document.getElementById('hp').textContent = hpStat.base_stat;
+    document.getElementById('attack').textContent = attackStat.base_stat;
+    document.getElementById('defense').textContent = defenseStat.base_stat;
+    document.getElementById('special-attack').textContent = specialAttackStat.base_stat;
+    document.getElementById('special-defense').textContent = specialDefenseStat.base_stat;
+    document.getElementById('speed').textContent = speedStat.base_stat;
+    document.getElementById('sprite').src = sprites.front_default;
+  } else {
+    // Handle the case when the Pokemon data could not be fetched
+    if (Number.isNaN(Number(pokemonId))) {
+      alert(`Invalid Pokemon ID: ${pokemonId}`);
+    } else {
+      alert(`Failed to fetch data for Pokemon ID ${pokemonId}`);
+    }
+  }
+}
+
+// Get the Pokemon ID from the user input
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 
 searchButton.addEventListener('click', () => {
-  const query = searchInput.value.toLowerCase();
-  fetchPokemonData(query);
+  const pokemonId = searchInput.value.trim();
+  if (pokemonId) {
+    displayPokemonInfo(pokemonId);
+  }
 });
 
-searchInput.addEventListener('keydown', (event) => {
+searchInput.addEventListener('keyup', (event) => {
   if (event.key === 'Enter') {
-    const query = searchInput.value.toLowerCase();
-    fetchPokemonData(query);
+    const pokemonId = searchInput.value.trim();
+    if (pokemonId) {
+      displayPokemonInfo(pokemonId);
+    }
   }
 });
-
-async function fetchPokemonData(query) {
-  try {
-    let pokemon;
-    if (query === '94') {
-      pokemon = {
-        name: 'gengar',
-        id: 94,
-        weight: 405,
-        height: 15,
-        types: [
-          { type: { name: 'ghost' } },
-          { type: { name: 'poison' } },
-        ],
-        stats: [
-          { base_stat: 60 },
-          { base_stat: 65 }, 
-          { base_stat: 60 }, 
-          { base_stat: 130 }, 
-          { base_stat: 75 }, 
-          { base_stat: 110 }, 
-        ],
-        sprites: {
-          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png'
-        },
-      };
-      displayPokemonInfo(pokemon);
-    } else {
-      if (!isNaN(parseInt(query))) {
-        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then(response => response.json());
-        displayPokemonInfo(pokemon);
-      } else {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-        if (!response.ok) {
-          throw new Error('Pokémon not found');
-        }
-        pokemon = await response.json();
-        displayPokemonInfo(pokemon);
-      }
-    }
-  } catch (error) {
-    alert(error.message);
-  }
-}
-
-function displayPokemonInfo(pokemon) {
-  document.getElementById('sprite').src = '';
-  document.getElementById('types').innerHTML = '';
-  document.getElementById('pokemon-name').textContent = pokemon.name.toUpperCase();
-  document.getElementById('pokemon-id').textContent = `#${pokemon.id}`;
-  document.getElementById('weight').textContent = `Weight: ${pokemon.weight}`;
-  document.getElementById('height').textContent = `Height: ${pokemon.height}`;
-
-  pokemon.types.forEach(type => {
-    const typeElement = document.createElement('div');
-    typeElement.textContent = type.type.name.toUpperCase();
-    document.getElementById('types').appendChild(typeElement);
-  });
-
-  document.getElementById('hp').textContent = pokemon.stats[0].base_stat;
-  document.getElementById('attack').textContent = pokemon.stats[1].base_stat;
-  document.getElementById('defense').textContent = pokemon.stats[2].base_stat;
-  document.getElementById('special-attack').textContent = pokemon.stats[3].base_stat;
-  document.getElementById('special-defense').textContent = pokemon.stats[4].base_stat;
-  document.getElementById('speed').textContent = pokemon.stats[5].base_stat;
-
-  document.getElementById('sprite').src = pokemon.sprites.front_default;
-}

@@ -39,7 +39,7 @@ Installation: If you haven't already, follow the installation instructions menti
 
 Navigate to project directory:
 
-     cd Pokemon Search App
+     cd Pokemon-Search-App
 
 Open the HTML file: Open the index.html file in your preferred web browser. You can do this by double-clicking the file or using a command-line tool like open (for macOS) or start (for Windows).
 
