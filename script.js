@@ -40,8 +40,12 @@ async function fetchPokemonData(query) {
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!Number.isNaN(parseInt(query,10))) {
-        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then((response) => response.json());
+      if (!Number.isNaN(parseInt(query, 10))) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+        if (!response.ok) {
+          throw new Error('Pokémon not found');
+        }
+        pokemon = await response.json();
         displayPokemonInfo(pokemon);
       } else {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
