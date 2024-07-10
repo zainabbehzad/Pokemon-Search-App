@@ -35,12 +35,12 @@ async function fetchPokemonData(query) {
           { base_stat: 110 }, 
         ],
         sprites: {
-          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png'
+          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png',
         },
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!isNaN(parseInt(query))) {
+      if (!Number.isNaN(parseInt(query))) {
         pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then(response => response.json());
         displayPokemonInfo(pokemon);
       } else {
