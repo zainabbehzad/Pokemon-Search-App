@@ -30,11 +30,19 @@ async function fetchPokemonData(query) {
         attack: 80,
         defense: 50,
       };
-      
       displayPokemonInfo(pokemon);
     } else {
       if (!Number.isNaN (parseInt(query, 10))) {
         pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then((response) => response.json());
+
+        const pikachu = {
+          name: 'Pikachu',
+          type: 'Electric',
+          hp: 100,
+          attack: 80,
+          defense: 50,
+        };
+        displayPokemonInfo(pikachu);
         displayPokemonInfo(pokemon);
       } else {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
