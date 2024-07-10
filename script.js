@@ -35,13 +35,13 @@ async function fetchPokemonData(query) {
           { base_stat: 110 },
         ],
         sprites: {
-          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png'
+          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png',
         },
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!isNaN(parseInt(query))) {
-        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then(response => response.json());
+      if (!Number.isNaN(parseInt(query))) {
+        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then(((response) => response.json()));
         displayPokemonInfo(pokemon);
       } else {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
@@ -65,7 +65,7 @@ function displayPokemonInfo(pokemon) {
   document.getElementById('weight').textContent = `Weight: ${pokemon.weight}`;
   document.getElementById('height').textContent = `Height: ${pokemon.height}`;
 
-  pokemon.types.forEach(type => {
+  pokemon.types.forEach((type) => {
     const typeElement = document.createElement('div');
     typeElement.textContent = type.type.name.toUpperCase();
     document.getElementById('types').appendChild(typeElement);
