@@ -1,18 +1,3 @@
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
-
-searchButton.addEventListener('click', () => {
-  const query = searchInput.value.toLowerCase();
-  fetchPokemonData(query);
-});
-
-searchInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    const query = searchInput.value.toLowerCase();
-    fetchPokemonData(query);
-  }
-});
-
 async function fetchPokemonData(query) {
   try {
     let pokemon;
@@ -40,8 +25,8 @@ async function fetchPokemonData(query) {
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!Number.isNaN(parseInt(query))) {
-        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then(((response) => response.json()));
+      if (!isNaN(parseInt(query, 10))) {
+        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then((response) => response.json());
         displayPokemonInfo(pokemon);
       } else {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
@@ -80,3 +65,18 @@ function displayPokemonInfo(pokemon) {
 
   document.getElementById('sprite').src = pokemon.sprites.front_default;
 }
+
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+
+searchButton.addEventListener('click', () => {
+  const query = searchInput.value.toLowerCase();
+  fetchPokemonData(query);
+});
+
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    const query = searchInput.value.toLowerCase();
+    fetchPokemonData(query);
+  }
+});
