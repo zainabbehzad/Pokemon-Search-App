@@ -23,9 +23,17 @@ async function fetchPokemonData(query) {
           front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png',
         },
       };
+      const pikachu = {
+        name: 'Pikachu',
+        type: 'Electric',
+        hp: 100,
+        attack: 80,
+        defense: 50,
+      };
+      
       displayPokemonInfo(pokemon);
     } else {
-      if (!isNaN(parseInt(query, 10))) {
+      if (!Number.isNaN (parseInt(query, 10))) {
         pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then((response) => response.json());
         displayPokemonInfo(pokemon);
       } else {
