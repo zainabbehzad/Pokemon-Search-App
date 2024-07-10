@@ -40,7 +40,7 @@ async function fetchPokemonData(query) {
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!Number.isNaN(parseInt(query))) {
+      if (!Number.isNaN(parseInt(query,10))) {
         pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`).then((response) => response.json());
         displayPokemonInfo(pokemon);
       } else {
