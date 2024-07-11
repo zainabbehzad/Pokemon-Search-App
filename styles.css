@@ -93,3 +93,7 @@ h1 {
   border-radius: 4px;
   text-align: center;
 }
+
+#error-message {
+  color: red;
+}
