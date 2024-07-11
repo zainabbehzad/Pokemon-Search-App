@@ -1,4 +1,3 @@
-
 async function fetchPokemonData(query) {
   try {
     let pokemon;
@@ -31,6 +30,7 @@ async function fetchPokemonData(query) {
       }
       pokemon = await response.json();
     }
+
     displayPokemonInfo(pokemon);
   } catch (error) {
     document.getElementById('error-message').textContent = error.message;
