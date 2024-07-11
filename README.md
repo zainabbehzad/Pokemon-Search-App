@@ -13,7 +13,7 @@ Overall, the Pokemon Search App is a valuable resource for Pokemon fans of all a
 ## Demo 📸
 ![Pokemon Search App](images/Screenshot%20(49).png)
 
-live Demo [https://zainabbehzad.github.io/Cash-Register/]
+live Demo [https://zainabbehzad.github.io/Pokemon-Search-App/]
 
 
 ## Cash-Register 🛠️
