@@ -1,17 +1,3 @@
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
-
-searchButton.addEventListener('click', () => {
-  const query = searchInput.value.toLowerCase();
-  fetchPokemonData(query);
-});
-
-searchInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    const query = searchInput.value.toLowerCase();
-    fetchPokemonData(query);
-  }
-});
 
 async function fetchPokemonData(query) {
   try {
@@ -38,26 +24,16 @@ async function fetchPokemonData(query) {
           front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png',
         },
       };
-      displayPokemonInfo(pokemon);
     } else {
-      if (!Number.isNaN(parseInt(query, 10))) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-        if (!response.ok) {
-          throw new Error('Pokémon not found');
-        }
-        pokemon = await response.json();
-        displayPokemonInfo(pokemon);
-      } else {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-        if (!response.ok) {
-          throw new Error('Pokémon not found');
-        }
-        pokemon = await response.json();
-        displayPokemonInfo(pokemon);
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+      if (!response.ok) {
+        throw new Error('Pokémon not found');
       }
+      pokemon = await response.json();
     }
+    displayPokemonInfo(pokemon);
   } catch (error) {
-    alert(error.message);
+    document.getElementById('error-message').textContent = error.message;
   }
 }
 
@@ -84,3 +60,18 @@ function displayPokemonInfo(pokemon) {
 
   document.getElementById('sprite').src = pokemon.sprites.front_default;
 }
+
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+
+searchButton.addEventListener('click', () => {
+  const query = searchInput.value.toLowerCase();
+  fetchPokemonData(query);
+});
+
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    const query = searchInput.value.toLowerCase();
+    fetchPokemonData(query);
+  }
+});
